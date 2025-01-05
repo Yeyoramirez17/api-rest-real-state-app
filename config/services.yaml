@@ -4,6 +4,11 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    cloudinary.cloudName: '%env(CLOUDINARY_CLOUD_NAME)%'
+    cloudinary.apiKey: '%env(CLOUDINARY_API_KEY)%'
+    cloudinary.apiSecret: '%env(CLOUDINARY_API_SECRET)%'
+    cloudinary.secure: '%env(CLOUDINARY_SECRET)%'
+    cloudinary.folder: '%env(CLOUDINARY_FOLDER)%'
 
 services:
     # default configuration for services in *this* file
@@ -22,3 +27,16 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    # App\EventListener\ExceptionSListener:
+    #     tags:
+    #         - { name: kernel.exception_listener, event: kernel.exception }
+
+    # Factories - Fixtures
+    Database\Factory\:
+        resource: '../database/Factory'
+    Database\DataFixtures\:
+        resource: '../database/DataFixtures'
+
+    App\Utils\FileStorage\Upload\Assets\UploadAssetService:
+        arguments:
+            $targetDirectory: '%kernel.project_dir%/public/uploads/images'
