@@ -35,7 +35,7 @@ class AuthController extends AbstractController
             status: Response::HTTP_CREATED,
         );
     }
-    #[Route(path: '/profile', name: 'app_auth_profile', methods: ['POST'])]
+    #[Route(path: '/profile', name: 'app_auth_profile', methods: ['GET'])]
     public function profile(): JsonResponse
     {
         return $this->json(

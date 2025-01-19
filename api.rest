@@ -1,0 +1,31 @@
+@port = 8081
+@host = http://127.0.0.1:{{port}}
+
+### Login
+# @name login
+POST {{host}}/api/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "admin@example.net",
+    "password": "password"
+}
+
+###
+
+@token = {{login.response.body.token}}
+
+### Profile
+GET {{host}}/api/auth/profile
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get all post
+GET {{host}}/api/posts?page=2
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
